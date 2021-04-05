@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-menu-button autoHide="false">
+        <ion-icon name="settings-outline" ios="ios-settings-outline"></ion-icon>
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-searchbar [(ngModel)]='search_key' (ionChange)="loadItems(search_key)" (ionClear)="loadItems('all')"
+      placeholder="Search dishes" showCancelButton="focus" debounce="500" type="text" animated>
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Dishes</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="chevron-down-circle-outline" pullingText="Pull to refresh"
+      refreshingSpinner="circles" refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-list *ngFor="let items of Object.keys(list); let index;">
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label>{{items}}</ion-label>
+      </ion-item-divider>
+      <ion-item *ngFor="let item of list[index]">
+        <ion-thumbnail slot="start" [routerLink]="['./details']" [queryParams]="{id: item.id}"
+          routerLinkActive="router-link-active">
+          <img *ngIf="item.disp_img == 'default.jpg'; else disp_img" src="assets/images/default.png">
+          <ng-template #disp_img>
+            <img src="assets/images/{{item.id}}/{{item.disp_img}}">
+          </ng-template>
+        </ion-thumbnail>
+        <ion-label>
+          <p>{{item.name}}<br>{{item.unit_price|currency:'INR'}}</p>
+        </ion-label>
+        <div class="btn-container">
+          <ion-button class="btn-view" color="primary" fill="outline" [routerLink]="['/edit']" [queryParams]="{id: item.id}">Edit
+          </ion-button>
+          <ion-toggle color="primary"></ion-toggle>
+        </div>
+      </ion-item>
+
+    </ion-item-group>
+
+
+  </ion-list>
+
+</ion-content>

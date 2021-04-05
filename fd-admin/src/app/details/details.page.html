@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="../" routerLinkActive="router-link-active"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Preview Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <img class="item-image" src="{{img_path}}">
+    <ion-card-header>
+      <ion-card-title class="price">{{item.name}}
+        <ion-button color="primary" fill="outline" size="small" disbled>
+          {{item.o_desc}}</ion-button>
+      </ion-card-title>
+      <ion-card-subtitle>
+        {{item.unit_price|currency:'INR'}}
+      </ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      {{item.description}}
+      <hr>
+      <ion-label>Min. Order Quantity : {{item.min_order_qty}}</ion-label>
+      <hr>
+      <div class="btn-container">
+        <ion-button color="dark" fill="outline" size="small"
+          href="whatsapp://send?phone={{item.w_app_order_contact}}&text=Preview Text - I want to place an order for {{item.name}}">
+          ORDER NOW</ion-button>
+
+        <ion-button color="dark" fill="outline" size="small" href="tel:{{item.call_order_contact}}">
+          INQUIRY </ion-button>
+      </div>
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>

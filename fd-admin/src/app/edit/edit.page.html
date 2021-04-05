@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="../" routerLinkActive="router-link-active"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Name of dish</ion-label>
+    <ion-input clearInput position="stacked" placeholder="Enter Input"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Dish Category</ion-label>
+    <ion-select value="brown" okText="Okay" cancelText="Dismiss">
+      <ion-select-option value="Vegetarian">Vegetarian</ion-select-option>
+      <ion-select-option value="Non - Veg">Non - Vegetarian</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Unit price</ion-label>
+    <ion-input clearInput position="stacked" placeholder="Enter Input"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Min. Order quantity</ion-label>
+    <ion-input clearInput position="stacked" placeholder="Enter Input" type="number" min=0></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">WhatsApp Contact</ion-label>
+    <ion-select value="brown" okText="Okay" cancelText="Dismiss">
+      <ion-select-option value="+91-7256301489">+91-7256301489</ion-select-option>
+      <ion-select-option value="+91-7256301450">+91-7256301450</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Inquiry Contact</ion-label>
+    <ion-select value="brown" okText="Okay" cancelText="Dismiss">
+      <ion-select-option value="+91-7256301489">+91-7256301489</ion-select-option>
+      <ion-select-option value="+91-7256301450">+91-7256301450</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Include offer</ion-label>
+    <ion-select value="brown" okText="Okay" cancelText="Dismiss">
+      <ion-select-option value="Buy 1 Get 1">Buy 1 Get 1</ion-select-option>
+      <ion-select-option value="25% Off">25% Off</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Short Description</ion-label>
+    <ion-input clearInput position="stacked" placeholder="Enter Input"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Description</ion-label>
+    <ion-textarea clearOnEdit="true"></ion-textarea>
+  </ion-item>
+</ion-content>
+<!-- <ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button>
+      <ion-label>CANCEL</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button>
+      <ion-label color="primary">SAVE</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs> -->

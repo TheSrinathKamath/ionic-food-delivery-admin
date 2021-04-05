@@ -1,0 +1,26 @@
+@import "../../theme/mixin.scss";
+
+.btn-container {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+
+    .btn-order {
+        width: fit-content;
+    }
+
+    .btn-view {
+        width: fit-content;
+    }
+
+    // @include sm-lesser {
+    //     grid-template-areas: "view" "order";
+
+    //     .btn-view {
+    //         grid-area: view;
+    //     }
+
+    //     .btn-order {
+    //         grid-area: order;
+    //     }
+    // }
+}

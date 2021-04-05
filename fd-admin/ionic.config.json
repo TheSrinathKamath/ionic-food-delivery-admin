@@ -1,0 +1,7 @@
+{
+  "name": "fd-admin",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
