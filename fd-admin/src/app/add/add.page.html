@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add Dish</ion-title>
+    <ion-button fill="clear" slot="end" (click)="createDish()">DRAFT&nbsp;<ion-icon name="save-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="dishForm">
+    <ion-card>
+      <label for="imageUpload" class="btn-img-edit"><ion-icon name="create-outline"></ion-icon></label>
+      <input type="file" (change)="onChange($event)" id="imageUpload" style="display: none;">
+      <img class="item-image" [src]="img_path">
+      <ion-card-header>
+        <ion-card-title class="price">
+          <ion-item>
+            <ion-label position="floating">Name of dish</ion-label>
+            <ion-input clearInput position="stacked" formControlName="dishName" placeholder="Enter Input"></ion-input>
+          </ion-item>
+        </ion-card-title>
+        <ion-card-subtitle>
+          <ion-item>
+            <ion-label position="floating">Food type</ion-label>
+            <ion-select formControlName="foodType" okText="Okay" cancelText="Dismiss">
+              <ion-select-option *ngFor="let type of f_types" [value]="type.t_id">
+                {{type.t_name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Unit price</ion-label>
+            <ion-input type="number" min=0 clearInput position="stacked" formControlName="unitPrice" placeholder="Enter unit price">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Min. Order quantity</ion-label>
+            <ion-input clearInput position="stacked" formControlName="minOrder" placeholder="Enter Input" type="number"
+              min=0></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Include Offer</ion-label>
+            <ion-select formControlName="offer" okText="Okay" cancelText="Dismiss">
+              <ion-select-option value=null>Nil</ion-select-option>
+              <ion-select-option *ngFor="let offer of offers" [value]="offer.o_id">{{offer.o_desc}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="floating">Short Description</ion-label>
+          <ion-input clearInput formControlName="shortDesc" position="stacked" placeholder="Enter Input"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Description</ion-label>
+          <ion-textarea rows="6" clearOnEdit="true" formControlName="desc"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Tags</ion-label><p style="font-size: smaller; color: gray;">(Tags help user to search for dish faster)</p>
+          <ion-textarea rows="3" clearOnEdit="true" formControlName="tags" placeholder="Example: Dosa, dosha, dossa."></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">WhatsApp Contact</ion-label>
+          <ion-select formControlName="w_app_contact" okText="Okay" cancelText="Dismiss">
+            <ion-select-option *ngFor="let w_contact of w_app_contact_arr" [value]="w_contact.c_id">
+              {{w_contact.c_name}} ({{w_contact.c_number}})</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Inquiry Contact</ion-label>
+          <ion-select formControlName="inq_contact" okText="Okay" cancelText="Dismiss">
+            <ion-select-option *ngFor="let inq_contact of inq_contact_arr" value="{{inq_contact.c_id}}">
+              {{inq_contact.c_name}} ({{inq_contact.c_number}})</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <hr>
+      </ion-card-content>
+    </ion-card>
+  </form>
+
+</ion-content>
+<div class="btn-container">
+  <ion-button color="primary" fill="clear" href="/">CANCEL</ion-button>
+  <ion-button color="primary" (click)="createDish(true)">PUBLISH</ion-button>
+</div>

@@ -1,0 +1,51 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-menu-button autoHide="false">
+        <ion-icon name="settings-outline"></ion-icon>
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-searchbar [(ngModel)]='search_key' (ionChange)="loadOffers(search_key)" (ionClear)="loadOffers('all')"
+      placeholder="Search offers" showCancelButton="focus" debounce="500" type="text" animated>
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="chevron-down-circle-outline" pullingText="Pull to refresh"
+      refreshingSpinner="circles" refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <div class="default-container" *ngIf="!dataLoaded">
+    <div style="text-align: center;" [routerLink]="['/offer']">
+      <img src="assets/icon/coupon.png">
+      <p class="smallText">Create a new offer!</p>
+    </div>
+  </div>
+  <ion-list *ngFor="let offer of Object.keys(list); let index;">
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label>{{offer == '1'?'Published':'Draft / In-Active'}}</ion-label>
+        <ion-badge color="medium" slot="start" style="margin-right: 10px;">{{offer.length}}</ion-badge>
+      </ion-item-divider>
+      <ion-item *ngFor="let item of list[index]">
+        <ion-label>
+          <p><b>{{item.o_desc}}</b><br>{{item.o_from_date|date:'dd-MM-yyyy'}} to
+            {{item.o_valid_to|date:'dd-MM-yyyy'}}
+          </p>
+        </ion-label>
+        <div class="btn-container">
+          <ion-toggle color="primary" (ionChange)="deactivateOffer(item.o_id, $event)"
+            [checked]="getState(item.is_active)"></ion-toggle>
+          <ion-button fill="clear" color="dark" (click)="deleteOffer(item.o_id, item.o_desc, $event)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+
+</ion-content>

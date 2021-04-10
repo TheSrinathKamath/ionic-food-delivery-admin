@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add Offer</ion-title>
+    <ion-button fill="clear" slot="end">DRAFT&nbsp;<ion-icon name="save-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="offerForm">
+    <div class="content">
+      <ion-item>
+        <ion-label position="floating">Offer Name</ion-label>
+        <ion-input formControlName="offerName" clearInput position="stacked" placeholder="Enter offer name">
+        </ion-input>
+        <div *ngIf="!offerForm.controls.offerName.valid &&
+        offerForm.controls.offerName.dirty" class="validator-error">
+          Please enter a valid name!
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-label>Percentage Discount</ion-label>
+        <ion-toggle formControlName="isPercent" color="primary" id="is_percent"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Discount</ion-label>
+        <ion-input formControlName="discount" clearInput position="stacked" placeholder="Enter Discount" type="number"
+          min=0></ion-input>
+        <div *ngIf="!offerForm.controls.discount.valid &&
+        offerForm.controls.discount.dirty" class="validator-error">
+          Please enter discount!
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-label>Start Date</ion-label>
+        <ion-datetime placeholder="Select Date" formControlName="startDate" min="{{today}}">
+        </ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Ends</ion-label>
+        <ion-datetime placeholder="Select Date" formControlName="endDate" min="{{offerForm.controls.startDate.value}}">
+        </ion-datetime>
+      </ion-item>
+    </div>
+  </form>
+</ion-content>
+<div class="btn-container">
+  <ion-button color="primary" fill="clear" href="/">CANCEL</ion-button>
+  <ion-button color="primary" (click)="publish()">PUBLISH</ion-button>
+</div>

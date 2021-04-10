@@ -12,8 +12,16 @@ const routes: Routes = [
         loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
       },
       {
-        path: 'tab2',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+        path: 'add',
+        loadChildren: () => import('../add/add.module').then(m => m.AddPageModule)
+      },
+      {
+        path: 'offer',
+        loadChildren: () => import('../offer/offer.module').then(m => m.OfferPageModule)
+      },
+      {
+        path: 'offers',
+        loadChildren: () => import('../offers/offers.module').then(m => m.OffersPageModule)
       },
       {
         path: '',
@@ -32,4 +40,4 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
 })
-export class TabsPageRoutingModule {}
+export class TabsPageRoutingModule { }

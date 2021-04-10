@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-buttons slot="end">
       <ion-menu-button autoHide="false">
-        <ion-icon name="settings-outline" ios="ios-settings-outline"></ion-icon>
+        <ion-icon name="settings-outline"></ion-icon>
       </ion-menu-button>
     </ion-buttons>
     <ion-searchbar [(ngModel)]='search_key' (ionChange)="loadItems(search_key)" (ionClear)="loadItems('all')"
@@ -22,13 +22,19 @@
       refreshingSpinner="circles" refreshingText="Refreshing...">
     </ion-refresher-content>
   </ion-refresher>
+  <div class="default-container" *ngIf="!dataLoaded">
+    <div style="text-align: center;" [routerLink]="['/add']">
+      <img src="assets/icon/eat.png">
+      <p class="smallText">Add a new dish!</p>
+    </div>
+  </div>
   <ion-list *ngFor="let items of Object.keys(list); let index;">
     <ion-item-group>
       <ion-item-divider>
         <ion-label>{{items}}</ion-label>
       </ion-item-divider>
       <ion-item *ngFor="let item of list[index]">
-        <ion-thumbnail slot="start" [routerLink]="['./details']" [queryParams]="{id: item.id}"
+        <ion-thumbnail slot="start" [routerLink]="['/edit']" [queryParams]="{id: item.id}"
           routerLinkActive="router-link-active">
           <img *ngIf="item.disp_img == 'default.jpg'; else disp_img" src="assets/images/default.png">
           <ng-template #disp_img>
@@ -39,9 +45,9 @@
           <p>{{item.name}}<br>{{item.unit_price|currency:'INR'}}</p>
         </ion-label>
         <div class="btn-container">
-          <ion-button class="btn-view" color="primary" fill="outline" [routerLink]="['/edit']" [queryParams]="{id: item.id}">Edit
-          </ion-button>
-          <ion-toggle color="primary"></ion-toggle>
+          <!-- <ion-button class="btn-view" color="primary" fill="outline" [routerLink]="['/edit']" [queryParams]="{id: item.id}">Edit
+          </ion-button> -->
+          <ion-toggle color="primary" (ionChange)="outOfStock(item.id, item.name, $event)" [checked]="getState(item.is_active)"></ion-toggle>
         </div>
       </ion-item>
 
